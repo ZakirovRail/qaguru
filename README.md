@@ -23,13 +23,11 @@ $ pip install -r requirements.txt
 $ pip freeze -> requirements.txt 
 
 
-
-
 # Using Pytest
 If you want to check which fixtures are run before and after tests, need to run --setup-plan
 - $ pytest --setup-plan <test_file_name>
 
-Run tests:
+Run tests (with printing):
 - $ pytest tests/tests_web_ui.py -s
 
 
