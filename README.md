@@ -37,3 +37,9 @@ To install flake8:
 
 You can run lint checker for your python code using flake8 tool:
 - $ flake8
+
+
+
+For debug in Firefox:
+To make a freeze: 
+$ setTimeout(function() {debugger;}, 3000);

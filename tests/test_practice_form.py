@@ -4,21 +4,6 @@ import time, os
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-TEST_FIRST_NAME = "Test_First_Name"
-TEST_LAST_NAME = "Test_Last_Name"
-TEST_EMAIL = "test_email@gmail.com"
-TEST_GENDER = "Male"
-TEST_PHONE_NUMBER = "1234567890"
-TEST_BIRTHDAY = "05 Mar 2000"
-TEST_BIRTHDAY_CHECK = "05 March,2000"
-TEST_SUBJECT = "Computer Science"
-TEST_HOBBIES = "Sports"
-TEST_PICTURE = "picture.png"
-TEST_CURRENT_ADDRESS = "India"
-TEST_STATE = "Uttar Pradesh"
-TEST_CITY = "Lucknow"
-
-
 def test_submit_student_registration_form(setup_browser):
     """
     Прежде чем писать автотест, надо понимать что мы вообще покрываем
@@ -46,37 +31,43 @@ def test_submit_student_registration_form(setup_browser):
     browser.element(".practice-form-wrapper h5").should(have.text("Student Registration Form"))
 
     # Step 2
-    browser.element("#firstName").type(TEST_FIRST_NAME)
-    browser.element("#lastName").type(TEST_LAST_NAME)
-    browser.element("#userEmail").type(TEST_EMAIL)
-    browser.element("#gender-radio-1").perform(command.js.click)
-    browser.element("#userNumber").type(TEST_PHONE_NUMBER)
-    browser.element("#dateOfBirthInput").send_keys(Keys.COMMAND, "a").type(TEST_BIRTHDAY).press_enter()
-    browser.element("#subjectsInput").type(TEST_SUBJECT).press_enter()
-    browser.element("[for ='hobbies-checkbox-1']").click()
-    browser.element("#uploadPicture").send_keys(os.getcwd() + "/"+ TEST_PICTURE)
-    browser.element("#currentAddress").type(TEST_CURRENT_ADDRESS)
-    browser.element("#submit").perform(command.js.scroll_into_view)
-    browser.element("#state").click()
-    # For TEST_STATE = "Uttar Pradesh"
-    browser.element("#react-select-3-option-1").perform(command.js.click)
-    browser.element('#city').click()
-    # For TEST_CITY = "Lucknow"
-    browser.element("#react-select-4-option-1").perform(command.js.click)
+    browser.element("#firstName").type("Test_First_Name")
+    browser.element("#lastName").type("Test_Last_Name")
+    browser.element("#userEmail").type("test_email@gmail.com")
+    browser.all("[name=gender]").element_by(have.value("Male")).element('./following-sibling::label').click()
+    browser.element("#userNumber").type("1234567890")
 
-    # Step 3
+    browser.element("#subjectsInput").type("Co")
+    browser.all("[id^=react-select][id*=option]").element_by(have.text("Computer Science")).click()
+
+    # Здесь нужно использовать .press_enter() иначе остается открытым окно с выбором дат
+    browser.element("#dateOfBirthInput").send_keys(Keys.COMMAND, "a").type("05 Mar 2000").press_enter()
+    browser.all("[for ^=hobbies-checkbox]").element_by(have.text("Sports")).perform(command.js.scroll_into_view).click()
+
+    browser.element("#uploadPicture").send_keys(os.path.abspath("../tests/resources/picture.png"))
+    browser.element("#currentAddress").type("India")
+
+    browser.element("#state").perform(command.js.scroll_into_view).click()
+    browser.all("[id^=react-select][id*=option]").element_by(have.text("Uttar Pradesh")).perform(command.js.click)
+    browser.element('#city').click()
+    browser.all("[id^=react-select][id*=option]").element_by(have.text("Lucknow")).perform(command.js.click)
+    browser.element("#submit").perform(command.js.scroll_into_view)
+
+    # # Step 3
     browser.element("#submit").perform(command.js.click)
     browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-    browser.element('.table tr:nth-child(1)>td:nth-child(2)').should(have.text(TEST_FIRST_NAME + ' ' + TEST_LAST_NAME))
-    browser.element('.table tr:nth-child(2)>td:nth-child(2)').should(have.text(TEST_EMAIL))
-    browser.element('.table tr:nth-child(3)>td:nth-child(2)').should(have.text(TEST_GENDER))
-    browser.element('.table tr:nth-child(4)>td:nth-child(2)').should(have.text(TEST_PHONE_NUMBER))
-    browser.element('.table tr:nth-child(5)>td:nth-child(2)').should(have.text(TEST_BIRTHDAY_CHECK))
-    browser.element('.table tr:nth-child(6)>td:nth-child(2)').should(have.text(TEST_SUBJECT))
-    browser.element('.table tr:nth-child(7)>td:nth-child(2)').should(have.text(TEST_HOBBIES))
-    browser.element('.table tr:nth-child(8)>td:nth-child(2)').should(have.text(TEST_PICTURE))
-    browser.element('.table tr:nth-child(9)>td:nth-child(2)').should(have.text(TEST_CURRENT_ADDRESS))
-    browser.element('.table tr:nth-child(10)>td:nth-child(2)').should(have.text(TEST_STATE + ' ' + TEST_CITY))
+    browser.all(".table").all("td:nth-of-type(2)").should(have.texts(
+        "Test_First_Name Test_Last_Name",
+        "test_email@gmail.com",
+        "Male",
+        "1234567890",
+        "05 March,2000",
+        "Computer Science",
+        "Sports",
+        "picture.png",
+        "India",
+        "Uttar Pradesh Lucknow"
+    ))
 
     # Step 4
     browser.element('#closeLargeModal').click()

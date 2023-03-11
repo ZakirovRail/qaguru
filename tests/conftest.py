@@ -8,7 +8,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 @pytest.fixture(scope="function")
 def setup_browser():
     print("\n We are setting up a browser")
-    browser.config.browser_name = 'firefox'
+    browser.config.browser_name = "firefox"
+
     yield
+
     print("\n Closing a browser")
-    browser.close()
+    browser.quit()
