@@ -9,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def setup_browser():
     print("\n We are setting up a browser")
     browser.config.browser_name = "firefox"
+    # browser.config.browser_name = "chrome"
 
     yield
 

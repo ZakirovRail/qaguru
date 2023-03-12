@@ -26,7 +26,14 @@ def test_submit_student_registration_form(setup_browser):
     - пользователь оказывается на странице регистрации снова
     """
     # Step 1
-    browser.open('https://demoqa.com/automation-practice-form')
+    browser.open("https://demoqa.com/automation-practice-form")
+    browser.all("[id^=google_ads][id$=container__]").with_(timeout=10).wait_until(have.size_less_than_or_equal(3))
+    browser.all("[id^=google_ads][id$=container__]").with_(timeout=10).perform(command.js.remove)
+
+    browser.all("[id=adplus-anchor]").with_(timeout=10).wait_until(have.size_less_than_or_equal(3))
+    browser.all("[id=adplus-anchor]").with_(timeout=10).perform(command.js.remove)
+
+    time.sleep(2)
     browser.should(have.title_containing("DEMOQA"))
     browser.element(".practice-form-wrapper h5").should(have.text("Student Registration Form"))
 
@@ -56,19 +63,17 @@ def test_submit_student_registration_form(setup_browser):
     # # Step 3
     browser.element("#submit").perform(command.js.click)
     browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-    browser.all(".table").all("td:nth-of-type(2)").should(have.texts(
-        "Test_First_Name Test_Last_Name",
-        "test_email@gmail.com",
-        "Male",
-        "1234567890",
-        "05 March,2000",
-        "Computer Science",
-        "Sports",
-        "picture.png",
-        "India",
-        "Uttar Pradesh Lucknow"
-    ))
-
+    browser.all(".table").all("td").should(have.texts(
+            ('Student Name', 'Test_First_Name Test_Last_Name'),
+            ('Student Email', 'test_email@gmail.com'),
+            ('Gender', 'Male'),
+            ('Mobile', '1234567890'),
+            ('Date of Birth', '05 March,2000'),
+            ('Subjects', 'Computer Science'),
+            ('Hobbies', 'Sports'),
+            ('Picture', 'picture.png'),
+            ('Address', 'India'),
+            ('State and City', 'Uttar Pradesh Lucknow'),))
     # Step 4
     browser.element('#closeLargeModal').click()
     browser.element(".practice-form-wrapper h5").should(have.text("Student Registration Form"))
