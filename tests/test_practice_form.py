@@ -62,18 +62,17 @@ def test_submit_student_registration_form(setup_browser):
 
     # # Step 3
     browser.element("#submit").perform(command.js.click)
-    browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-    browser.all(".table").all("td").should(have.texts(
-            ('Student Name', 'Test_First_Name Test_Last_Name'),
-            ('Student Email', 'test_email@gmail.com'),
-            ('Gender', 'Male'),
-            ('Mobile', '1234567890'),
-            ('Date of Birth', '05 March,2000'),
-            ('Subjects', 'Computer Science'),
-            ('Hobbies', 'Sports'),
-            ('Picture', 'picture.png'),
-            ('Address', 'India'),
-            ('State and City', 'Uttar Pradesh Lucknow'),))
+    browser.element("#example-modal-sizes-title-lg").should(have.text("Thanks for submitting the form"))
+    browser.all("table>tbody>tr:nth-of-type(1)").should(have.exact_texts("Student Name Test_First_Name Test_Last_Name"))
+    browser.all("table>tbody>tr:nth-of-type(2)").should(have.exact_texts("Student Email test_email@gmail.com"))
+    browser.all("table>tbody>tr:nth-of-type(3)").should(have.exact_texts("Gender Male"))
+    browser.all("table>tbody>tr:nth-of-type(4)").should(have.exact_texts("Mobile 1234567890"))
+    browser.all("table>tbody>tr:nth-of-type(5)").should(have.exact_texts("Date of Birth 05 March,2000"))
+    browser.all("table>tbody>tr:nth-of-type(6)").should(have.exact_texts("Subjects Computer Science"))
+    browser.all("table>tbody>tr:nth-of-type(7)").should(have.exact_texts("Hobbies Sports"))
+    browser.all("table>tbody>tr:nth-of-type(8)").should(have.exact_texts("Picture picture.png"))
+    browser.all("table>tbody>tr:nth-of-type(9)").should(have.exact_texts("Address India"))
+    browser.all("table>tbody>tr:nth-of-type(10)").should(have.exact_texts("State and City Uttar Pradesh Lucknow"))
     # Step 4
     browser.element('#closeLargeModal').click()
     browser.element(".practice-form-wrapper h5").should(have.text("Student Registration Form"))
