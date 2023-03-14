@@ -1,6 +1,6 @@
 from selene import browser, have, command, be
 from selenium.webdriver import ActionChains, Keys
-import time, os
+import time, os, platform
 from selenium.webdriver.common.action_chains import ActionChains
 
 
@@ -47,9 +47,18 @@ def test_submit_student_registration_form(setup_browser):
     browser.element("#subjectsInput").type("Co")
     browser.all("[id^=react-select][id*=option]").element_by(have.text("Computer Science")).click()
 
-    # Здесь нужно использовать .press_enter() иначе остается открытым окно с выбором дат
-    browser.element("#dateOfBirthInput").send_keys(Keys.COMMAND, "a").type("05 Mar 2000").press_enter()
-    browser.all("[for ^=hobbies-checkbox]").element_by(have.text("Sports")).perform(command.js.scroll_into_view).click()
+    #Determine type of OS -  Linux: Linux, Mac: Darwin, Windows: Windows
+    platform_system = platform.system()
+    print(f"platform_system is: {platform_system}")
+    if platform_system == "Darwin" or platform_system == "Linux":
+        # Здесь нужно использовать .press_enter() иначе остается открытым окно с выбором дат
+        browser.element("#dateOfBirthInput").send_keys(Keys.COMMAND, "a").type("05 Mar 2000").press_enter()
+        browser.all("[for ^=hobbies-checkbox]").element_by(have.text("Sports")).perform(
+            command.js.scroll_into_view).click()
+    elif platform_system == "Windows":
+        browser.element("#dateOfBirthInput").send_keys(Keys.CONTROL, "a").type("05 Mar 2000").press_enter()
+        browser.all("[for ^=hobbies-checkbox]").element_by(have.text("Sports")).perform(
+            command.js.scroll_into_view).click()
 
     browser.element("#uploadPicture").send_keys(os.path.abspath("../tests/resources/picture.png"))
     browser.element("#currentAddress").type("India")
