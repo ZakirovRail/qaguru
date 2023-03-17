@@ -19,11 +19,13 @@ from reportlab.pdfgen.canvas import Canvas
 3. Write a test for reading files in archive without unzipping files 
 """
 
-
 def prepare_test_files() -> None:
     if not os.path.isdir("test_data"):
         os.mkdir("test_data")
     #  Preparing csv test file
+    if not os.path.isdir("resources"):
+        os.mkdir("resources")
+
     with open("test_data/test_csv.csv", "w") as test_file:
         csv_writer = csv.writer(test_file, delimiter=";")
         csv_writer.writerow(["Name", "Surname", "Age", "Email", "Registration Date"])
@@ -105,8 +107,8 @@ def archive_move_files():
     print("\n Now we should remove all test files after running test")
     # If you want manually check that test data and archive were created, disable bellow lines
     if pathlib.Path("resources/test_archive.zip").is_file():
-        print("Removing the archive:'test_archive.zip'")
-        os.remove("resources/test_archive.zip")
+        print("Removing the 'resources' folder")
+        shutil.rmtree(pathlib.Path("resources"))
     if pathlib.Path("test_data").is_dir():
         print("Removing the dir:'test_data'")
         shutil.rmtree(pathlib.Path("test_data"))
