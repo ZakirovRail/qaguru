@@ -1,3 +1,6 @@
 pytest
 selene == 2.0.0b17
 pandas
+PyPDF2
+openpyxl
+reportlab
