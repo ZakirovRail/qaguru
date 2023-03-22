@@ -1,7 +1,8 @@
-from selene import browser, have, command, be
-from selenium.webdriver import ActionChains, Keys
-import time, os, platform
-from selenium.webdriver.common.action_chains import ActionChains
+from selene import browser, have, command
+from selenium.webdriver import Keys
+import time
+import os
+import platform
 
 
 def test_submit_student_registration_form(setup_browser):

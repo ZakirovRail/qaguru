@@ -133,3 +133,6 @@ dmypy.json
 
 # Linter
 .flake8
+
+# Allure
+*/allure-results
