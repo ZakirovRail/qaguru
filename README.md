@@ -40,6 +40,24 @@ You can run lint checker for your python code using flake8 tool:
 
 
 
+
+
+
+# Install Allure as a test report
+Documentation - https://docs.qameta.io/allure-report/#_installing_a_commandline
+
+Github repository - 
+1. Install on a Mac:
+$ brew install allure
+2. Add the allure-pytest into requirememts.txt file and install it in your venv
+3. Add the directory with test results to .gitignore file
+4. Run pytest with command $ --alluredir=allure-results, e.x.
+$ pytest --alluredir=allure-results
+5. Run command 
+$ allure serve tests/allure-results
+
+
+# Hints
 For debug in Firefox:
 To make a freeze: 
 $ setTimeout(function() {debugger;}, 3000);

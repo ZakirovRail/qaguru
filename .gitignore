@@ -130,6 +130,10 @@ dmypy.json
 
 #IDEA
 .idea/
+*/.DS_Store
 
 # Linter
 .flake8
+
+# Allure
+*/allure-results
