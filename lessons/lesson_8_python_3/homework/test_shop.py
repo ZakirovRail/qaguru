@@ -100,6 +100,16 @@ class TestCart:
         cart.remove_product(product, 2000)
         assert product not in cart.products
 
+        cart.add_product(product, 100)
+        cart.remove_product(product, 100)
+        assert product not in cart.products
+
+        cart.add_product(product, 100)
+        cart.remove_product(product, 40)
+        assert cart.products == {product: 60}
+
+
+
     def test_successful_clear(self, product, cart):
         cart.add_product(product, quantity=5)
         cart.clear()
