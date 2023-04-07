@@ -5,6 +5,8 @@
 import time
 import pytest
 from selene import browser
+from selene.support.conditions import be
+
 
 @pytest.fixture(params=["Desktop", "Mobile"], scope="function")
 def setup_browser(request):
@@ -26,6 +28,7 @@ def test_github_desktop(setup_browser):
     if setup_browser == "Desktop":
         print("Desktop")
         browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
+        browser.element(".js-sign-in-button").should(be.visible)
         get_url = browser.driver.current_url
         assert get_url == "https://github.com/login"
     elif setup_browser == "Mobile":
@@ -38,5 +41,6 @@ def test_github_mobile(setup_browser):
     elif setup_browser == "Mobile":
         browser.element(".HeaderMenu-toggle-bar").with_(timeout=5.0).click()
         browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
+        browser.element(".js-sign-in-button").should(be.visible)
         get_url = browser.driver.current_url
         assert get_url == "https://github.com/login"

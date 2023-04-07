@@ -3,6 +3,8 @@
 """
 import pytest
 import selene
+from selene.core import query
+from selene.support.conditions import be, have
 
 
 @pytest.fixture(params=["Desktop", "Mobile"])
@@ -19,6 +21,7 @@ def browser(request):
 @pytest.mark.parametrize("browser", ["Desktop"], indirect=True)
 def test_github_desktop(browser):
     selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
+    selene.browser.element(".js-sign-in-button").should(be.visible)
     get_url = selene.browser.driver.current_url
     assert get_url == "https://github.com/login"
 
@@ -27,5 +30,6 @@ def test_github_desktop(browser):
 def test_github_mobile(browser):
     selene.browser.element(".HeaderMenu-toggle-bar").with_(timeout=5.0).click()
     selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
+    selene.browser.element(".js-sign-in-button").should(be.visible)
     get_url = selene.browser.driver.current_url
     assert get_url == "https://github.com/login"
