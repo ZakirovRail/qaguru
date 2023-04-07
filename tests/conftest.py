@@ -1,17 +1,11 @@
-from selene import browser
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from selene import browser
 
 
-@pytest.fixture(scope="function")
-def setup_browser():
-    print("\n We are setting up a browser")
-    browser.config.browser_name = "firefox"
-    # browser.config.browser_name = "chrome"
+@pytest.fixture(scope="function", autouse=True)
+def open_browser():
+    browser.config.base_url = 'https://demoqa.com'
 
     yield
 
-    print("\n Closing a browser")
     browser.quit()

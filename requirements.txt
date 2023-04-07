@@ -1,8 +1,6 @@
-pytest
-selene == 2.0.0b17
-pandas
-PyPDF2
-openpyxl
-reportlab
-selenium
+pytest~=7.2.1
+selene==2.0.0b17
+pypdf2~=3.0.1
+openpyxl~=3.1.2
 allure-pytest
+python-dotenv==0.20.0
