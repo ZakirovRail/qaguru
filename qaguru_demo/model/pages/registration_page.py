@@ -3,7 +3,10 @@ import time
 
 from selene import have, command
 from selene import browser
-from lessons.lesson_10_page_objects.hw_high_level_step_objects.data.user import NewUser
+from selene.support import by
+
+from qaguru_demo import helpers
+from qaguru_demo.data.user import NewUser
 
 
 class RegistrationPage:
@@ -44,7 +47,7 @@ class RegistrationPage:
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
 
     def upload_photo(self, photo_path):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(photo_path))
+        browser.element('#uploadPicture').send_keys(helpers.resources_path(photo_path))
 
     def fill_current_address(self, current_address):
         browser.element('#currentAddress').type(current_address)

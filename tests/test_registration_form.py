@@ -1,13 +1,16 @@
-from qaguru.data.user import userFemale
-from qaguru.model.pages.registration_page import RegistrationPage
+from qaguru_demo.data import user
+from qaguru_demo.model.pages import registration_page as reg_page
+
+# from qaguru_demo.data.user import userFemale
+# from qaguru_demo.model.pages.registration_page import RegistrationPage
 
 
 def test_student_registration_form():
-    new_user = userFemale
-    registration_page = RegistrationPage()
+    new_user = user.userFemale
+    registration_page = reg_page.RegistrationPage()
 
     registration_page.open()
-    registration_page.register_new_user(new_user = new_user)
+    registration_page.register_new_user(new_user=new_user)
     registration_page.should_registered_user_with(
         'Olga Kutuzova',
         'olga_kuz@gmail.com',
