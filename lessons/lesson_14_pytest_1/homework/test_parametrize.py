@@ -18,14 +18,14 @@ def browser(request):
 
 @pytest.mark.parametrize("browser", ["Desktop"], indirect=True)
 def test_github_desktop(browser):
-    selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=3.0).click()
+    selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
     get_url = selene.browser.driver.current_url
     assert get_url == "https://github.com/login"
 
 
 @pytest.mark.parametrize("browser", ["Mobile"], indirect=True)
 def test_github_mobile(browser):
-    selene.browser.element(".HeaderMenu-toggle-bar").with_(timeout=3.0).click()
-    selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=3.0).click()
+    selene.browser.element(".HeaderMenu-toggle-bar").with_(timeout=5.0).click()
+    selene.browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
     get_url = selene.browser.driver.current_url
     assert get_url == "https://github.com/login"

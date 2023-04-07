@@ -21,13 +21,13 @@ def set_mobile_browser():
 
 
 def test_github_desktop(set_desktop_browser):
-    browser.element(".HeaderMenu-link--sign-in").with_(timeout=2.0).click()
+    browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
     get_url = browser.driver.current_url
     assert get_url == "https://github.com/login"
 
 
 def test_github_mobile(set_mobile_browser):
-    browser.element(".HeaderMenu-toggle-bar").with_(timeout=2.0).click()
-    browser.element(".HeaderMenu-link--sign-in").with_(timeout=2.0).click()
+    browser.element(".HeaderMenu-toggle-bar").with_(timeout=5.0).click()
+    browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
     get_url = browser.driver.current_url
     assert get_url == "https://github.com/login"

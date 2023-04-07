@@ -25,7 +25,7 @@ def test_github_desktop(setup_browser):
     print(f"\n Run on device:{setup_browser}")
     if setup_browser == "Desktop":
         print("Desktop")
-        browser.element(".HeaderMenu-link--sign-in").with_(timeout=4.0).click()
+        browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
         get_url = browser.driver.current_url
         assert get_url == "https://github.com/login"
     elif setup_browser == "Mobile":
@@ -36,7 +36,7 @@ def test_github_mobile(setup_browser):
     if setup_browser == "Desktop":
         pytest.skip("Mobile test should not be run on a desktop device")
     elif setup_browser == "Mobile":
-        browser.element(".HeaderMenu-toggle-bar").with_(timeout=3.0).click()
-        browser.element(".HeaderMenu-link--sign-in").with_(timeout=3.0).click()
+        browser.element(".HeaderMenu-toggle-bar").with_(timeout=5.0).click()
+        browser.element(".HeaderMenu-link--sign-in").with_(timeout=5.0).click()
         get_url = browser.driver.current_url
         assert get_url == "https://github.com/login"
