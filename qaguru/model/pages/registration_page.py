@@ -1,12 +1,10 @@
-import os
 import time
 import allure
 
 from selene import have, command
-from selene import browser
 
-from qaguru_demo import helpers
-from qaguru_demo.data.user import NewUser
+from qaguru import helpers
+from qaguru.data.user import NewUser
 
 
 class RegistrationPage:
