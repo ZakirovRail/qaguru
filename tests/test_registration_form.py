@@ -1,12 +1,14 @@
+import allure
 from qaguru_demo.data.user import userFemale
 from qaguru_demo.model.pages.registration_page import RegistrationPage
 
-LINK = "/automation-practice-form"
+LINK = "https://demoqa.com/automation-practice-form"
 
 
-def test_student_registration_form():
+@allure.title("Test: New student registration")
+def test_student_registration_form(setup_browser):
     new_user = userFemale
-    registration_page = RegistrationPage()
+    registration_page = RegistrationPage(setup_browser)
 
     registration_page.open(LINK)
     registration_page.register_new_user(new_user=new_user)
