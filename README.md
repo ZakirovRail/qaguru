@@ -61,3 +61,7 @@ $ allure serve tests/allure-results
 For debug in Firefox:
 To make a freeze: 
 $ setTimeout(function() {debugger;}, 3000);
+
+
+# To avoid problems with import it's usefull to run in shell: 
+$ export PYTHONPATH="${PYTHONPATH}:/path/to/your/project/"
