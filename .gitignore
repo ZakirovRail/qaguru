@@ -131,7 +131,7 @@ dmypy.json
 #IDEA
 .idea/
 */.DS_Store
-
+.DS_Store
 # Linter
 .flake8
 
