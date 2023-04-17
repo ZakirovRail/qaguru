@@ -1,0 +1,17 @@
+{
+  "base": {
+    "logo": "",
+    "project": "QA Guru Python 4",
+    "environment": "Test env",
+    "comment": "Test results",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6289637314:AAHjsLx7vfwRLAgsnLwMCXUjrCy3imGuDbo",
+    "chat": "-1001923889364",
+    "replyTo": ""
+  }
+}

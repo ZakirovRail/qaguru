@@ -100,7 +100,7 @@ def test_add_todos_and_complete_one():
     browser.element('#new-todo').type('c.').press_enter()
     browser.element('#new-todo').type('d.').press_enter()
     '''
-    # just example of different type of selectors/locators you can use
+    # just example of differents type of selectors/locators you can use
     # css selectors are the simplest:
     browser.element('#new-todo').type('a.').press_enter()
     # selenium style of locators:
@@ -191,7 +191,7 @@ def test_add_todos_and_complete_one():
     # ... you can see that they are same by checking the size of the result collection:
     browser.all('#todo-list>li input').should(have.size(6))
     browser.all('#todo-list>li').all('input').should(have.size(6))
-    # while this will be a bit different:
+    # while this will be a bit differents:
     browser.all('#todo-list>li').all_first('input').should(have.size(3))
     # and similar to:
     browser.all('#todo-list>li .toggle').should(have.size(3))
