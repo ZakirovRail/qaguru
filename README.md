@@ -54,7 +54,7 @@ $ brew install allure
 4. Run pytest with command $ --alluredir=allure-results, e.x.
 $ pytest --alluredir=allure-results
 5. Run command 
-$ allure serve tests/allure-results
+$ allure serve allure-results
 
 
 # Hints
