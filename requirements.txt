@@ -4,3 +4,6 @@ pypdf2~=3.0.1
 openpyxl~=3.1.2
 allure-pytest
 python-dotenv==0.20.0
+voluptuous
+pytest-voluptuous
+logging
