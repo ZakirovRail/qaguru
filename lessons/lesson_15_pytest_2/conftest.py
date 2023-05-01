@@ -61,5 +61,7 @@ def pytest_runtest_makereport(item, call):
     """Make screenshot"""
     outcome = yield
     result = outcome.get_result()
+    # It's about how to make a screenshot when test is failed
+    # Arenadata repositories with different examples of hooks
     # if item.when == "call" and result.failed is True:
     #     make_screenshot()
