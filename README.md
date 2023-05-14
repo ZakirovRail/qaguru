@@ -4,7 +4,7 @@ Repo for the online course QA GURU
 # Create a new virtual env and activate:
 $ pip install virtualenv
 $ virtualenv qaguru_env
-$ source qaguru_venv/bin/activate
+$ source qaguru_env/bin/activate
 $ pip install -r requirements.txt
 $ deactivate
 
