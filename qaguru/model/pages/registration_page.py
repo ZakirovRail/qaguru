@@ -3,7 +3,7 @@ import allure
 
 from selene import have, command, by
 
-from qaguru import helpers
+from utils import helper
 from qaguru.data.user import NewUser
 
 
@@ -60,7 +60,7 @@ class RegistrationPage:
     @allure.step(f"Upload photo")
     def upload_photo(self, photo_path):
         # self.browser.element('#uploadPicture').send_keys(helpers.resources_path(photo_path))
-        self.browser.element(by.id('uploadPicture')).send_keys(helpers.resources_path(photo_path))
+        self.browser.element(by.id('uploadPicture')).send_keys(helper.resources_path(photo_path))
 
     @allure.step(f"Fill in current address")
     def fill_current_address(self, current_address):

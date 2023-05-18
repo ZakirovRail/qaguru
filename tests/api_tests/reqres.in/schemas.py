@@ -31,6 +31,22 @@ class Schemas:
         required=True
     )
 
+    # list_users_schema = Schema(
+    #     {
+    #         "page": int,
+    #         "per_page": int,
+    #         "total": int,
+    #         "total_pages": int,
+    #         "data": [user_schema],
+    #         "support": {
+    #             "url": str,
+    #             "text": str
+    #         }
+    #     },
+    #     extra=PREVENT_EXTRA,
+    #     required=True
+    # )
+
     schema_single_user = Schema(
         {
             "data": {
@@ -65,6 +81,55 @@ class Schemas:
             "name": str,
             "job": str,
             "updatedAt": str,
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
+
+    list_users_schema = Schema(
+        {
+            "page": int,
+            "per_page": int,
+            "total": int,
+            "total_pages": int,
+            "data": [user_schema],
+            "support": {
+                "url": str,
+                "text": str
+            }
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
+
+    new_user_successful_register = Schema(
+        {
+            "id": int,
+            "token": str,
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
+
+    new_user_unsuccessful_register = Schema(
+        {
+            "error": str
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
+
+    user_login_successful = Schema(
+        {
+            "token": str
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
+
+    user_login_unsuccessful = Schema(
+        {
+            "token": str
         },
         extra=PREVENT_EXTRA,
         required=True

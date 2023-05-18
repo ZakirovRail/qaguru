@@ -9,8 +9,11 @@ from utils import attach
 
 from webdriver_manager.chrome import ChromeDriverManager
 
+from utils.helper import BaseSession, Globals
+
 DEFAULT_BROWSER_VERSION = "100.0"
 
+load_dotenv()
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -60,3 +63,9 @@ def setup_browser(request):
     attach.add_video(browser)
 
     browser.quit()
+
+
+@pytest.fixture(scope="session")
+def reqres_base():
+    with BaseSession(base_url=Globals.REQRES_API) as session:
+        yield session
