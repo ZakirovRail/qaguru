@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 from utils import attach
 
+from webdriver_manager.chrome import ChromeDriverManager
+
 DEFAULT_BROWSER_VERSION = "100.0"
 
 
@@ -42,9 +44,11 @@ def setup_browser(request):
     login = os.getenv("LOGIN")
     password = os.getenv("PASSWORD")
 
-    driver = webdriver.Remote(
-        command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
-        options=options)
+    # driver = webdriver.Remote(
+    #     command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
+    #     options=options)
+
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     browser = Browser(Config(driver))
 

@@ -1,4 +1,4 @@
-from lessons.lesson_10_page_objects.hw_mid_level_step_objects.model.pages.registration_page import RegistrationPage
+from hw_mid_level_step_objects.model.pages.registration_page import RegistrationPage
 
 
 def test_student_registration_form():
@@ -14,7 +14,7 @@ def test_student_registration_form():
     registration_page.fill_date_of_birth("2000", "Mar", "05")
     registration_page.fill_subjects("Computer Science")
     registration_page.select_hobbies("Reading")
-    registration_page.upload_photo("lessons/lesson_10_page_objects/hw_mid_level_step_objects/tests/resources/foto.jpg")
+    registration_page.upload_photo("foto.jpg")
     registration_page.fill_current_address("India")
 
     registration_page.fill_state("Uttar Pradesh")

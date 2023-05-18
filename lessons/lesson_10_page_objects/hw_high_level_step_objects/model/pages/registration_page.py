@@ -1,9 +1,11 @@
 import os
 import time
 
-from selene import have, command
+from selene import have, command, by
 from selene import browser
+
 from lessons.lesson_10_page_objects.hw_high_level_step_objects.data.user import NewUser
+from lessons.lesson_10_page_objects.hw_high_level_step_objects.model.pages import helpers
 
 
 class RegistrationPage:
@@ -44,7 +46,7 @@ class RegistrationPage:
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
 
     def upload_photo(self, photo_path):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(photo_path))
+        browser.element(by.id('uploadPicture')).send_keys(helpers.resources_path(photo_path))
 
     def fill_current_address(self, current_address):
         browser.element('#currentAddress').type(current_address)
@@ -59,7 +61,6 @@ class RegistrationPage:
 
     def click_submit_button(self):
         browser.element('#submit').perform(command.js.click)
-
 
     def register_new_user(self, new_user: NewUser):
         self.fill_first_name(new_user.first_name)
@@ -77,19 +78,18 @@ class RegistrationPage:
         self.fill_city(new_user.city)
         self.click_submit_button()
 
-    def should_registered_user_with(self, full_name, email, gender, phone_number, dateofbirth, subjects, hobbies,
-                                    photo_path, address, state_city):
+    def should_registered_user_with(self, student: NewUser):
         browser.element('.table').all('td').even.should(
             have.exact_texts(
-                full_name,
-                email,
-                gender,
-                phone_number,
-                dateofbirth,
-                subjects,
-                hobbies,
-                photo_path,
-                address,
-                state_city,
+                f"{student.first_name} {student.last_name}",
+                student.user_email,
+                student.gender,
+                student.user_phone_number,
+                f"{student.day_of_birth} {student.month_of_birth},{student.year_of_birth}",
+                student.subjects,
+                student.hobbies,
+                student.photo,
+                student.address,
+                f"{student.state} {student.city}"
             )
         )

@@ -1,5 +1,5 @@
 import os
-import tests
+from hw_mid_level_step_objects import tests
 
 
 def resources_path(file_name):

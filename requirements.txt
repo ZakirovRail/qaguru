@@ -6,4 +6,3 @@ allure-pytest
 python-dotenv==0.20.0
 voluptuous
 pytest-voluptuous
-logging

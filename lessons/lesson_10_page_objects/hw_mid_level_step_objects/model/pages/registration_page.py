@@ -1,8 +1,11 @@
 import os
 import time
 
-from selene import have, command
+from selene import have, command, by
 from selene import browser
+
+from hw_mid_level_step_objects.model.pages import helpers
+
 
 class RegistrationPage:
 
@@ -44,7 +47,7 @@ class RegistrationPage:
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
 
     def upload_photo(self, photo_path):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(photo_path))
+        browser.element(by.id('uploadPicture')).send_keys(helpers.resources_path(photo_path))
 
     def fill_current_address(self, current_address):
         browser.element('#currentAddress').type(current_address)

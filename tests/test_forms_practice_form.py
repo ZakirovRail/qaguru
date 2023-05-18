@@ -12,15 +12,4 @@ def test_student_registration_form(setup_browser):
 
     registration_page.open(LINK)
     registration_page.register_new_user(new_user=new_user)
-    registration_page.should_registered_user_with(
-        'Olga Kutuzova',
-        'olga_kuz@gmail.com',
-        'Female',
-        '1234567891',
-        '05 March,2000',
-        'Computer Science',
-        'Reading',
-        'foto.jpg',
-        'India',
-        'Uttar Pradesh Lucknow',
-    )
+    registration_page.should_registered_user_with(student=new_user)

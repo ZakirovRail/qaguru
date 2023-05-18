@@ -43,9 +43,6 @@ You can run lint checker for your python code using flake8 tool:
 
 
 
-
-
-
 # Install Allure as a test report
 Documentation - https://docs.qameta.io/allure-report/#_installing_a_commandline
 
@@ -68,6 +65,21 @@ $ setTimeout(function() {debugger;}, 3000);
 
 # To avoid problems with import it's usefull to run in shell: 
 $ export PYTHONPATH="${PYTHONPATH}:/path/to/your/project/"
+$ export PYTHONPATH="${PYTHONPATH}:/Users/rzakirov/Repository/qaguru"
+
+
+# To run locally tests need to modify Conftest file ()
+Replace the bellow:
+driver = webdriver.Remote(
+    command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
+    options=options)
+
+
+
+with the bellow:
+
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
 
 
