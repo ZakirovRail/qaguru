@@ -1,4 +1,4 @@
-from voluptuous import Schema, PREVENT_EXTRA
+from voluptuous import Schema, PREVENT_EXTRA, Length, All
 
 
 class Schemas:
@@ -21,6 +21,7 @@ class Schemas:
             "per_page": int,
             "total": int,
             "total_pages": int,
+            # "data": All([user_schema], Length(min=1)),
             "data": [user_schema],
             "support": {
                 "url": str,
@@ -31,21 +32,21 @@ class Schemas:
         required=True
     )
 
-    # list_users_schema = Schema(
-    #     {
-    #         "page": int,
-    #         "per_page": int,
-    #         "total": int,
-    #         "total_pages": int,
-    #         "data": [user_schema],
-    #         "support": {
-    #             "url": str,
-    #             "text": str
-    #         }
-    #     },
-    #     extra=PREVENT_EXTRA,
-    #     required=True
-    # )
+    list_users_schema = Schema(
+        {
+            "page": int,
+            "per_page": int,
+            "total": int,
+            "total_pages": int,
+            "data": [user_schema],
+            "support": {
+                "url": str,
+                "text": str
+            }
+        },
+        extra=PREVENT_EXTRA,
+        required=True
+    )
 
     schema_single_user = Schema(
         {

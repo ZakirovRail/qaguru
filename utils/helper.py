@@ -30,7 +30,7 @@ class BaseSession(Session):
             response = super().request(method=method, url=f'{self.base_url}{url}', **kwargs)
             content_type = response.headers.get("content-type", None)
 
-            logging.info(f"/n Status code: {response.status_code}")
+            logging.info(f"Status code: {response.status_code}")
             logging.info(curlify.to_curl(response.request))
             curl_log = f'STATUS CODE: {response.status_code} {curlify.to_curl(response.request)}'
 
