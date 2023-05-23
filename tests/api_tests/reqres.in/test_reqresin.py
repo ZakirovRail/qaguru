@@ -12,7 +12,6 @@ import json
 #     user_login_unsuccessful, list_users_schema
 
 
-
 logger = logging.getLogger(__name__)
 
 base_url = "https://reqres.in/api/users"

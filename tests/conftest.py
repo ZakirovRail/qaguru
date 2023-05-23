@@ -1,3 +1,4 @@
+import logging
 import os
 import pytest
 from selenium import webdriver
@@ -68,4 +69,11 @@ def setup_browser(request):
 @pytest.fixture(scope="session")
 def reqres_base():
     with BaseSession(base_url=Globals.REQRES_API) as session:
+        yield session
+
+
+@pytest.fixture(scope="session")
+def ninja_cats():
+    with BaseSession(base_url="https://api.api-ninjas.com/v1/cats") as session:
+        session.headers = {"X-Api-Key": "NrsQojr18YJN+WaqNrzFVg==gArROyAUopaDvRlg"}
         yield session

@@ -1,12 +1,18 @@
 from voluptuous import Schema, PREVENT_EXTRA, Length, All
 
 
+def is_email_true(email):
+    if "@" in email and "." in email:
+        return True
+    raise ValueError(f"It's not an email : {email}")
+
+
 class Schemas:
 
     user_schema = Schema(
         {
             "id": int,
-            "email": str,
+            "email": All(str, is_email_true),
             "first_name": str,
             "last_name": str,
             "avatar": str,

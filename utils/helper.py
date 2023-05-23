@@ -15,9 +15,18 @@ class Globals:
     TRICENTIS_URL = os.getenv('TRICENTIS_URL')
     WEB_SHOP_API_URL = os.getenv('WEB_SHOP_API_URL')
 
+
 def resources_path(file_name):
-    # return os.getcwd() + f'/tests/resources/{file_name}'
     return os.path.abspath(os.path.join(os.path.dirname(tests.__file__), f'resources/{file_name}'))
+
+
+def console_logger(function):
+    def wrapper(*args, **kwargs):
+        response = function(*args, **kwargs)
+        logging.info(curlify.to_curl(response.request))
+        logging.info(response.text)
+        return response
+    return wrapper
 
 
 class BaseSession(Session):
@@ -25,13 +34,14 @@ class BaseSession(Session):
         self.base_url = kwargs.pop('base_url')
         super().__init__()
 
+    @console_logger
     def request(self, method, url, **kwargs):
         with step(f'Вызов метода:{method} end-point: {url}'):
             response = super().request(method=method, url=f'{self.base_url}{url}', **kwargs)
             content_type = response.headers.get("content-type", None)
 
-            logging.info(f"Status code: {response.status_code}")
-            logging.info(curlify.to_curl(response.request))
+            # logging.info(f"Status code: {response.status_code}")
+            # logging.info(curlify.to_curl(response.request))
             curl_log = f'STATUS CODE: {response.status_code} {curlify.to_curl(response.request)}'
 
             if not content_type:
